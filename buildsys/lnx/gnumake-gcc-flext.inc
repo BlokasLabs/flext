@@ -72,4 +72,7 @@ endif
 # make convenience script
 #	echo bash $(FLEXTSYS)/build.sh $$\* > $(FLEXTBIN)/flext-build.sh
 #	chmod a+rx $(FLEXTBIN)/flext-build.sh
-	
+
+	echo "#!/bin/sh" > $(FLEXTBIN)/flext-build.sh
+	echo "exec $(realpath $(dir $(realpath $(firstword $(MAKEFILE_LIST))))../build.sh) \$$@" >> $(FLEXTBIN)/flext-build.sh
+	chmod a+rx $(FLEXTBIN)/flext-build.sh
